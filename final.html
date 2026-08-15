@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <!-- 1. บรรทัดนี้สำคัญมาก! ทำให้เว็บพอดีจอมือถือ ไม่หดเล็ก -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ดาด้าไปเที่ยวกันม่ะ?❤️</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: 'Mitr', 'Sarabun', sans-serif;
+      background: linear-gradient(135deg, #ff9aa2, #b5eaea);
+      overflow: hidden;
+      margin: 0;
+      padding: 15px; /* เว้นขอบนิดหน่อยให้สวยงาม */
+      box-sizing: border-box;
+    }
+    
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+      transition: opacity 0.5s ease;
+      text-align: center;
+      font-size: 26px; /* ปรับฟอนต์ให้พอดีมือถือ */
+    }
+
+    .container {
+      position: relative;
+      /* 2. เปลี่ยนให้ขนาดกล่องยืดหยุ่นตามหน้าจอ */
+      width: 100%;       
+      max-width: 500px;  
+      height: 300px; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px dashed rgba(255,255,255,0.5); 
+      border-radius: 20px;
+      transition: opacity 0.5s ease;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    #yesBtn {
+      background-color: #ff4d6d;
+      color: white;
+      transition: transform 0.2s;
+      z-index: 5;
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.1); 
+    }
+
+    #noBtn {
+      background-color: #ffffff;
+      color: #ff4d6d;
+      position: absolute;
+      /* ให้เริ่มต้นเกาะขวาของกล่อง จะได้ไม่หลุดจอ */
+      right: 10%; 
+      transition: top 0.25s ease-out, left 0.25s ease-out; 
+      z-index: 10;
+    }
+
+    #successArea {
+      display: none; 
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 1s; 
+      width: 100%;
+      text-align: center;
+    }
+
+    /* ปรับแต่งรูปภาพให้แสดงผลในมือถือได้สวยไม่ตกขอบ */
+    #successArea img {
+      width: 90%; 
+      max-width: 400px; 
+      max-height: 55vh;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      margin-bottom: 20px;
+    }
+
+    #successArea h2 {
+      color: #333;
+      text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+      font-size: 22px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* ปรับขนาดตัวอักษรกรณีมือถือจอเล็กมาก */
+    @media (max-width: 380px) {
+      h1 { font-size: 22px; }
+      button { padding: 10px 20px; font-size: 16px; }
+      .container { height: 260px; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="mainTitle">❤️ดาด้าไปเที่ยวกันม่ะ❤️</h1>
+  
+  <div class="container" id="playArea">
+    <button id="yesBtn" onclick="showPicture()">ไปดิ!❤️</button>
+    <!-- 3. เพิ่ม ontouchstart เพื่อให้ในมือถือกดปุ๊บหนีปั๊บ -->
+    <button id="noBtn" onmouseover="moveButton(event)" ontouchstart="moveButton(event)">ไม่ไป!❌</button>
+  </div>
+
+  <div id="successArea">
+    <img src="testpics.jpg" alt="เย้!">
+    <h2>เย้! ตกลงแล้วนะ! เดี๋ยวไปรับ ❤️</h2>
+  </div>
+
+  <script>
+    function moveButton(e) {
+      // ป้องกันการแตะจอ (touch) แล้วกลายเป็นการกดปุ่มจริงๆ
+      if(e && e.type === 'touchstart') {
+        e.preventDefault();
+      }
+
+      const btn = document.getElementById('noBtn');
+      const yesBtn = document.getElementById('yesBtn');
+      const area = document.getElementById('playArea');
+      
+      // ยกเลิกการล็อกตำแหน่งชิดขวาตอนเริ่มต้น เพื่อให้ปุ่มสุ่มตำแหน่งใหม่ได้อย่างอิสระ
+      btn.style.right = 'auto';
+
+      const areaWidth = area.offsetWidth;
+      const areaHeight = area.offsetHeight;
+      const btnWidth = btn.offsetWidth;
+      const btnHeight = btn.offsetHeight;
+
+      const yesLeft = yesBtn.offsetLeft;
+      const yesTop = yesBtn.offsetTop;
+      const yesRight = yesLeft + yesBtn.offsetWidth;
+      const yesBottom = yesTop + yesBtn.offsetHeight;
+
+      const padding = 15; 
+      let newX, newY;
+      let isOverlapping = true;
+
+      while (isOverlapping) {
+        newX = Math.random() * (areaWidth - btnWidth);
+        newY = Math.random() * (areaHeight - btnHeight);
+
+        const noRight = newX + btnWidth;
+        const noBottom = newY + btnHeight;
+
+        if (
+          newX < yesRight + padding &&
+          noRight > yesLeft - padding &&
+          newY < yesBottom + padding &&
+          noBottom > yesTop - padding
+        ) {
+          isOverlapping = true; 
+        } else {
+          isOverlapping = false; 
+        }
+      }
+      
+      btn.style.left = `${newX}px`;
+      btn.style.top = `${newY}px`;
+    }
+
+    function showPicture() {
+      document.getElementById('mainTitle').style.display = 'none';
+      document.getElementById('playArea').style.display = 'none';
+      document.getElementById('successArea').style.display = 'flex';
+    }
+  </script>
+
+</body>
+</html>
