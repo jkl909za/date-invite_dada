@@ -28,7 +28,7 @@
       background: linear-gradient(135deg, #ffe0e9 0%, #d4f8f8 100%);
       overflow-x: hidden;
       margin: 0;
-      padding: 10px;
+      padding: 15px;
       position: relative;
     }
 
@@ -46,6 +46,7 @@
     
     h1 {
       color: #333;
+      margin-top: 0;
       margin-bottom: 10px;
       text-shadow: 2px 2px 4px rgba(255,255,255,0.7);
       text-align: center;
@@ -70,12 +71,13 @@
       transform: scale(1.3) rotate(-3deg);
     }
 
-    /* Container การ์ดส่วนกลาง */
+    /* Container การ์ดส่วนกลางปรับตามเนื้อหา */
     .container {
       position: relative;
       width: 100%;
-      max-width: 360px;  
-      height: 260px;
+      max-width: 380px;  
+      min-height: 240px;
+      height: auto;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -84,17 +86,17 @@
       border-radius: 25px;
       background-color: rgba(255, 255, 255, 0.65);
       backdrop-filter: blur(5px);
-      transition: all 0.5s ease;
+      transition: all 0.3s ease;
       z-index: 10;
-      padding: 15px;
-      overflow: hidden; /* ล็อคไม่ให้ปุ่มทะลุออกนอกกล่อง */
+      padding: 20px 15px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.05);
     }
 
-    /* Step 1: จัดวางปุ่มเริ่มต้นให้อยู่กลางกล่อง ไม่หลุดขอบ */
+    /* Step 1 ล็อคความสูงเฉพาะปุ่มวิ่งหนี */
     #step1 {
       position: relative;
       width: 100%;
-      height: 100%;
+      min-height: 200px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -115,6 +117,7 @@
       transition: all 0.2s ease;
       background-color: #ff4d6d;
       color: white;
+      margin-top: 10px;
     }
 
     button.btn-action:hover {
@@ -143,7 +146,7 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
       width: 100%;
-      margin-top: 5px;
+      margin-top: 10px;
       margin-bottom: 10px;
     }
 
@@ -151,7 +154,7 @@
       background: white;
       border: 2px solid transparent;
       border-radius: 15px;
-      padding: 8px 5px;
+      padding: 12px 5px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -167,7 +170,8 @@
     }
 
     .option-icon {
-      font-size: 28px;
+      font-size: 32px;
+      margin-bottom: 4px;
     }
 
     .option-name {
@@ -182,30 +186,30 @@
       flex-direction: column;
       align-items: center;
       width: 100%;
-      gap: 8px;
+      gap: 12px;
     }
 
     .input-group {
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 4px;
       width: 100%;
-      max-width: 240px;
+      max-width: 260px;
       text-align: left;
     }
 
     .input-group label {
-      font-size: 14px;
+      font-size: 15px;
       color: #444;
       font-weight: 600;
     }
 
     .input-group input {
-      padding: 8px 12px;
-      border-radius: 10px;
+      padding: 10px 14px;
+      border-radius: 12px;
       border: 2px solid #ff9aa2;
       font-family: 'Kanit', sans-serif;
-      font-size: 14px;
+      font-size: 15px;
       outline: none;
       background: white;
       width: 100%;
@@ -225,8 +229,8 @@
     .photo-card {
       background: white;
       padding: 10px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
       transform: rotate(-2deg);
       margin-bottom: 15px;
       width: 100%;
@@ -234,30 +238,30 @@
 
     #successArea img {
       width: 100%;
-      max-height: 220px;
-      border-radius: 8px;
+      max-height: 240px;
+      border-radius: 10px;
       object-fit: cover;
       display: block;
     }
 
     .summary-box {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 12px 20px;
-      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px 20px;
+      border-radius: 20px;
       text-align: left;
       box-shadow: 0 4px 15px rgba(0,0,0,0.06);
       width: 100%;
     }
 
     .summary-box h3 {
-      margin: 0 0 6px 0;
+      margin: 0 0 10px 0;
       color: #ff4d6d;
       font-size: 18px;
       text-align: center;
     }
 
     .summary-box p {
-      margin: 4px 0;
+      margin: 6px 0;
       color: #444;
       font-size: 15px;
     }
@@ -290,7 +294,7 @@
     
     <!-- Step 1: ปุ่มคำถามแรก -->
     <div id="step1">
-      <button id="yesBtn" class="btn-action" onclick="goToStep2()">ไปดิ! ❤️</button>
+      <button id="yesBtn" class="btn-action" style="margin-top:0;" onclick="goToStep2()">ไปดิ! ❤️</button>
       <button id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton(event)">ไม่ไป! ❌</button>
     </div>
 
@@ -345,7 +349,7 @@
         <label for="pickupTime">⏰ ให้ไปรับกี่โมง:</label>
         <input type="time" id="pickupTime">
       </div>
-      <button class="btn-action" style="margin-top: 5px;" onclick="showSummary()">ตกลงตามนี้! ❤️</button>
+      <button class="btn-action" onclick="showSummary()">ตกลงตามนี้! ❤️</button>
     </div>
 
   </div>
@@ -412,7 +416,6 @@
       document.getElementById('pickupTime').value = "17:00";
     });
 
-    // ✅ คำนวณพิกัดสุ่มให้อยู่ภายในขอบเขตของ #step1 100%
     function moveButton(e) {
       if(e && e.type === 'touchstart') e.preventDefault();
       
@@ -420,26 +423,22 @@
       const container = document.getElementById('step1');
       const pleaText = document.getElementById('pleaText');
       
-      // สลับข้อความ
       pleaIndex = (pleaIndex + 1) % pleaMessages.length;
       pleaText.innerText = pleaMessages[pleaIndex];
 
       pleaText.classList.add('pop-effect');
       setTimeout(() => pleaText.classList.remove('pop-effect'), 150);
 
-      // กำหนดตำแหน่งเป็น absolute เมื่อมีการหลบครั้งแรก
       btn.style.position = 'absolute';
 
       const maxW = container.clientWidth - btn.offsetWidth;
       const maxH = container.clientHeight - btn.offsetHeight;
 
-      // สุ่มพิกัดแบบปลอดภัยในพื้นที่ maxW และ maxH
       const randomX = Math.floor(Math.random() * Math.max(0, maxW));
       const randomY = Math.floor(Math.random() * Math.max(0, maxH));
 
       btn.style.left = `${randomX}px`;
       btn.style.top = `${randomY}px`;
-      btn.style.right = 'auto';
     }
 
     function goToStep2() {
