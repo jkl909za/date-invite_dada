@@ -5,15 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ดาด้าไปเที่ยวกันม่ะ?❤️</title>
 
-  <!-- นำเข้า Google Fonts (Kanit) -->
+  <!-- Google Fonts (Kanit) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <!-- นำเข้าไลบรารี Confetti สำหรับจุดพลุกระดาษ -->
+  <!-- Confetti Library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       display: flex;
       flex-direction: column;
@@ -24,6 +28,7 @@
       background: linear-gradient(135deg, #ffe0e9 0%, #d4f8f8 100%);
       overflow-x: hidden;
       margin: 0;
+      padding: 10px;
       position: relative;
     }
 
@@ -45,15 +50,15 @@
       text-shadow: 2px 2px 4px rgba(255,255,255,0.7);
       text-align: center;
       z-index: 10;
-      font-size: 24px;
+      font-size: 22px;
     }
 
     #pleaText {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 600;
       color: #ff4d6d;
       margin-bottom: 15px;
-      height: 35px;
+      height: 30px;
       text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.9);
       z-index: 10;
       transition: transform 0.15s ease-out;
@@ -68,213 +73,209 @@
     /* Container การ์ดส่วนกลาง */
     .container {
       position: relative;
-      width: 85%;
-      max-width: 450px;  
-      height: 250px;
+      width: 100%;
+      max-width: 360px;  
+      height: 260px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      border: 2px dashed rgba(255, 255, 255, 0.8); 
-      border-radius: 30px;
-      background-color: rgba(255, 255, 255, 0.5);
+      border: 2px dashed rgba(255, 255, 255, 0.9); 
+      border-radius: 25px;
+      background-color: rgba(255, 255, 255, 0.65);
       backdrop-filter: blur(5px);
       transition: all 0.5s ease;
       z-index: 10;
       padding: 15px;
-      box-sizing: border-box;
-      overflow: hidden; /* ป้องกันปุ่มล้นออกนอกกล่อง */
+      overflow: hidden; /* ล็อคไม่ให้ปุ่มทะลุออกนอกกล่อง */
+    }
+
+    /* Step 1: จัดวางปุ่มเริ่มต้นให้อยู่กลางกล่อง ไม่หลุดขอบ */
+    #step1 {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
     }
 
     /* ปุ่มหลักทั่วไป */
     button.btn-action {
-      padding: 12px 30px;
+      padding: 10px 24px;
       font-size: 18px;
       font-weight: 600;
       font-family: 'Kanit', sans-serif;
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
       user-select: none;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
       background-color: #ff4d6d;
       color: white;
     }
 
     button.btn-action:hover {
-      transform: scale(1.08) rotate(-2deg);
-      box-shadow: 0 8px 25px rgba(255, 77, 109, 0.4);
+      transform: scale(1.05);
     }
 
-    /* ✅ แก้ไขปุ่มวิ่งหนี ไม่ให้ตั้งพิกัดหลุดออกไปข้างนอก */
+    /* ปุ่มไม่ไป */
     #noBtn {
-      background-color: #ffffff;
-      color: #ff4d6d;
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      transition: all 0.15s ease-out; 
-      z-index: 10;
-      padding: 10px 25px;
-      font-size: 16px;
+      padding: 10px 24px;
+      font-size: 18px;
       font-weight: 600;
       font-family: 'Kanit', sans-serif;
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+      background-color: #ffffff;
+      color: #ff4d6d;
       white-space: nowrap;
+      z-index: 20;
     }
 
     /* Grid สำหรับการ์ดตัวเลือก */
     .option-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      gap: 10px;
       width: 100%;
       margin-top: 5px;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
     .option-card {
       background: white;
-      border: 3px solid transparent;
-      border-radius: 20px;
-      padding: 10px 5px;
+      border: 2px solid transparent;
+      border-radius: 15px;
+      padding: 8px 5px;
       display: flex;
       flex-direction: column;
       align-items: center;
       cursor: pointer;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-
-    .option-card:hover {
-      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
     }
 
     .option-card.selected {
       border-color: #ff4d6d;
       background-color: #fff0f3;
-      transform: scale(1.05);
+      transform: scale(1.03);
     }
 
     .option-icon {
-      font-size: 32px;
-      margin-bottom: 2px;
+      font-size: 28px;
     }
 
     .option-name {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
       color: #333;
     }
 
-    /* ส่วนฟอร์มเลือกวันเวลา */
+    /* ฟอร์มเลือกวันเวลา */
     #dateStep {
       display: none;
       flex-direction: column;
       align-items: center;
       width: 100%;
-      gap: 10px;
+      gap: 8px;
     }
 
     .input-group {
       display: flex;
       flex-direction: column;
-      gap: 5px;
-      width: 90%;
-      max-width: 280px;
+      gap: 3px;
+      width: 100%;
+      max-width: 240px;
       text-align: left;
     }
 
     .input-group label {
-      font-size: 15px;
+      font-size: 14px;
       color: #444;
       font-weight: 600;
     }
 
     .input-group input {
       padding: 8px 12px;
-      border-radius: 12px;
+      border-radius: 10px;
       border: 2px solid #ff9aa2;
       font-family: 'Kanit', sans-serif;
-      font-size: 15px;
+      font-size: 14px;
       outline: none;
       background: white;
+      width: 100%;
     }
 
-    /* หน้าสรุปผลลัพธ์ */
+    /* หน้าสรุป */
     #successArea {
       display: none; 
       flex-direction: column;
       align-items: center;
-      animation: fadeIn 1s ease-out;
+      animation: fadeIn 0.8s ease-out;
       z-index: 10;
-      padding-bottom: 30px;
-      width: 90%;
-      max-width: 400px;
+      width: 100%;
+      max-width: 360px;
     }
 
     .photo-card {
-      background: rgb(255, 255, 255);
-      padding: 12px;
-      border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      transform: rotate(-3deg);
+      background: white;
+      padding: 10px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      transform: rotate(-2deg);
       margin-bottom: 15px;
-      position: relative;
       width: 100%;
-      box-sizing: border-box;
     }
 
     #successArea img {
       width: 100%;
-      max-height: 35vh;
-      border-radius: 5px;
+      max-height: 220px;
+      border-radius: 8px;
       object-fit: cover;
       display: block;
     }
 
     .summary-box {
-      background: rgba(255, 255, 255, 0.85);
-      padding: 15px 20px;
-      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 12px 20px;
+      border-radius: 18px;
       text-align: left;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
       width: 100%;
-      box-sizing: border-box;
     }
 
     .summary-box h3 {
-      margin: 0 0 8px 0;
+      margin: 0 0 6px 0;
       color: #ff4d6d;
-      font-size: 20px;
+      font-size: 18px;
       text-align: center;
     }
 
     .summary-box p {
-      margin: 5px 0;
+      margin: 4px 0;
       color: #444;
-      font-size: 16px;
+      font-size: 15px;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.8) translateY(20px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
     }
 
     .floating-heart {
       position: absolute;
       pointer-events: none;
       animation: floatUp linear infinite;
-      opacity: 0.7;
+      opacity: 0.6;
     }
 
     @keyframes floatUp {
-      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.7; }
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.6; }
       100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
     }
   </style>
@@ -285,18 +286,17 @@
   
   <div id="pleaText">ไปป่าว 🥺</div>
 
-  <!-- Container หลักสำหรับขั้นตอนที่ 1-4 -->
   <div class="container" id="playArea">
     
-    <!-- Step 1: คำถามแรก (ปุ่มวิ่งหนี) -->
-    <div id="step1" style="display: flex; justify-content: space-around; align-items: center; width: 100%; height: 100%; position: relative;">
-      <button id="yesBtn" class="btn-action" style="position: absolute; left: 20px;" onclick="goToStep2()">ไปดิ! ❤️</button>
-      <button id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">ไม่ไป! ❌</button>
+    <!-- Step 1: ปุ่มคำถามแรก -->
+    <div id="step1">
+      <button id="yesBtn" class="btn-action" onclick="goToStep2()">ไปดิ! ❤️</button>
+      <button id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton(event)">ไม่ไป! ❌</button>
     </div>
 
-    <!-- Step 2: เลือกสถานที่เที่ยว -->
+    <!-- Step 2: เลือกสถานที่ -->
     <div id="placeStep" style="display: none; flex-direction: column; align-items: center; width: 100%;">
-      <h3 style="color: #333; margin: 0 0 5px 0;">อยากไปไหนดีน้า? 🤔</h3>
+      <h3 style="color: #333; margin: 0 0 5px 0; font-size: 18px;">อยากไปไหนดีน้า? 🤔</h3>
       <div class="option-grid">
         <div class="option-card" onclick="selectPlace(this, 'ไปดูหนัง 🍿')">
           <div class="option-icon">🍿</div>
@@ -312,7 +312,7 @@
 
     <!-- Step 3: เลือกอาหาร -->
     <div id="foodStep" style="display: none; flex-direction: column; align-items: center; width: 100%;">
-      <h3 style="color: #333; margin: 0 0 5px 0;">แล้วมื้อนี้กินไรดี? 😋</h3>
+      <h3 style="color: #333; margin: 0 0 5px 0; font-size: 18px;">แล้วมื้อนี้กินไรดี? 😋</h3>
       <div class="option-grid">
         <div class="option-card" onclick="selectFood(this, 'ส้มตำแซ่บๆ 🥗')">
           <div class="option-icon">🥗</div>
@@ -336,7 +336,7 @@
 
     <!-- Step 4: เลือกวันและเวลา -->
     <div id="dateStep">
-      <h3 style="color: #333; margin: 0 0 5px 0;">นัดวันเวลาหน่อยสิ 🗓️</h3>
+      <h3 style="color: #333; margin: 0 0 5px 0; font-size: 18px;">นัดวันเวลาหน่อยสิ 🗓️</h3>
       <div class="input-group">
         <label for="travelDate">📅 ไปวันไหนดี:</label>
         <input type="date" id="travelDate">
@@ -350,12 +350,12 @@
 
   </div>
 
-  <!-- Step 5: หน้าสรุปผลลัพธ์พร้อมรูปภาพ -->
+  <!-- Step 5: สรุปผล -->
   <div id="successArea">
     <div class="photo-card">
       <img src="testpics.jpg" alt="เย้!">
     </div>
-    <h2 style="margin: 0 0 10px 0; font-size: 24px;">เย้! ดีลเรียบร้อย ❤️</h2>
+    <h2 style="margin: 0 0 10px 0; font-size: 22px;">เย้! ดีลเรียบร้อย ❤️</h2>
     <div class="summary-box">
       <h3>สรุปแพลนเดท ✨</h3>
       <p id="summaryPlace">📍 สถานที่: -</p>
@@ -379,9 +379,7 @@
 
     function createFloatingHearts() {
       const container = document.body;
-      const heartCount = 12;
-
-      for (let i = 0; i < heartCount; i++) {
+      for (let i = 0; i < 10; i++) {
         createHeart(container);
       }
     }
@@ -391,21 +389,17 @@
       heart.innerHTML = '❤️';
       heart.classList.add('floating-heart');
       
-      const size = Math.random() * 18 + 10;
+      const size = Math.random() * 16 + 10;
       const left = Math.random() * 100;
-      const duration = Math.random() * 5 + 5;
-      const delay = Math.random() * 5;
-      const colors = ['#ffb6c1', '#add8e6', '#ffc0cb', '#e0ffff'];
-      const color = colors[Math.floor(Math.random() * colors.length)];
+      const duration = Math.random() * 4 + 4;
+      const delay = Math.random() * 4;
 
       heart.style.fontSize = `${size}px`;
       heart.style.left = `${left}%`;
       heart.style.animationDuration = `${duration}s`;
       heart.style.animationDelay = `${delay}s`;
-      heart.style.color = color;
 
       container.appendChild(heart);
-
       heart.addEventListener('animationend', () => {
         heart.remove();
         createHeart(container);
@@ -418,38 +412,34 @@
       document.getElementById('pickupTime').value = "17:00";
     });
 
-    // ✅ ปรับแก้ระบบคำนวณตำแหน่งปุ่มวิ่งหนีให้อยู่ภายใน Container เสมอ
-    function moveButton() {
+    // ✅ คำนวณพิกัดสุ่มให้อยู่ภายในขอบเขตของ #step1 100%
+    function moveButton(e) {
+      if(e && e.type === 'touchstart') e.preventDefault();
+      
       const btn = document.getElementById('noBtn');
-      const yesBtn = document.getElementById('yesBtn');
-      const area = document.getElementById('playArea');
+      const container = document.getElementById('step1');
       const pleaText = document.getElementById('pleaText');
       
+      // สลับข้อความ
       pleaIndex = (pleaIndex + 1) % pleaMessages.length;
       pleaText.innerText = pleaMessages[pleaIndex];
 
       pleaText.classList.add('pop-effect');
       setTimeout(() => pleaText.classList.remove('pop-effect'), 150);
 
-      const areaWidth = area.clientWidth;
-      const areaHeight = area.clientHeight;
-      const btnWidth = btn.offsetWidth;
-      const btnHeight = btn.offsetHeight;
+      // กำหนดตำแหน่งเป็น absolute เมื่อมีการหลบครั้งแรก
+      btn.style.position = 'absolute';
 
-      const margin = 15;
-      const maxLeft = areaWidth - btnWidth - margin;
-      const maxTop = areaHeight - btnHeight - margin;
+      const maxW = container.clientWidth - btn.offsetWidth;
+      const maxH = container.clientHeight - btn.offsetHeight;
 
-      let newX = Math.random() * (maxLeft - margin) + margin;
-      let newY = Math.random() * (maxTop - margin) + margin;
+      // สุ่มพิกัดแบบปลอดภัยในพื้นที่ maxW และ maxH
+      const randomX = Math.floor(Math.random() * Math.max(0, maxW));
+      const randomY = Math.floor(Math.random() * Math.max(0, maxH));
 
-      // ล็อคตำแหน่งปุ่ม ไม่ให้หลุดพิกัดขอบกล่อง
-      newX = Math.max(margin, Math.min(newX, maxLeft));
-      newY = Math.max(margin, Math.min(newY, maxTop));
-      
-      btn.style.left = `${newX}px`;
-      btn.style.top = `${newY}px`;
-      btn.style.transform = 'none'; // ยกเลิก translateY
+      btn.style.left = `${randomX}px`;
+      btn.style.top = `${randomY}px`;
+      btn.style.right = 'auto';
     }
 
     function goToStep2() {
@@ -519,30 +509,10 @@
       document.getElementById('successArea').style.display = 'flex';
 
       confetti({
-        particleCount: 150,
-        spread: 80,
-        origin: { y: 0.7 },
-        colors: ['#ff4d6d', '#ffb6c1', '#ffffff', '#add8e6']
+        particleCount: 120,
+        spread: 70,
+        origin: { y: 0.6 }
       });
-      
-      setTimeout(() => {
-          confetti({
-            particleCount: 50,
-            angle: 60,
-            spread: 55,
-            origin: { x: 0 },
-            colors: ['#ffb6c1', '#add8e6']
-          });
-      }, 200);
-      setTimeout(() => {
-          confetti({
-            particleCount: 50,
-            angle: 120,
-            spread: 55,
-            origin: { x: 1 },
-            colors: ['#ffb6c1', '#add8e6']
-          });
-      }, 400);
     }
   </script>
 
