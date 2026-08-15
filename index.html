@@ -41,14 +41,15 @@
     
     h1 {
       color: #333;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       text-shadow: 2px 2px 4px rgba(255,255,255,0.7);
       text-align: center;
       z-index: 10;
+      font-size: 24px;
     }
 
     #pleaText {
-      font-size: 26px;
+      font-size: 22px;
       font-weight: 600;
       color: #ff4d6d;
       margin-bottom: 15px;
@@ -57,6 +58,7 @@
       z-index: 10;
       transition: transform 0.15s ease-out;
       user-select: none;
+      text-align: center;
     }
 
     .pop-effect {
@@ -66,9 +68,9 @@
     /* Container การ์ดส่วนกลาง */
     .container {
       position: relative;
-      width: 90%;
-      max-width: 560px;  
-      min-height: 280px;
+      width: 85%;
+      max-width: 450px;  
+      height: 250px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -79,14 +81,15 @@
       backdrop-filter: blur(5px);
       transition: all 0.5s ease;
       z-index: 10;
-      padding: 20px;
+      padding: 15px;
       box-sizing: border-box;
+      overflow: hidden; /* ป้องกันปุ่มล้นออกนอกกล่อง */
     }
 
     /* ปุ่มหลักทั่วไป */
     button.btn-action {
-      padding: 12px 35px;
-      font-size: 20px;
+      padding: 12px 30px;
+      font-size: 18px;
       font-weight: 600;
       font-family: 'Kanit', sans-serif;
       border: none;
@@ -104,40 +107,42 @@
       box-shadow: 0 8px 25px rgba(255, 77, 109, 0.4);
     }
 
-    /* ปุ่มวิ่งหนี */
+    /* ✅ แก้ไขปุ่มวิ่งหนี ไม่ให้ตั้งพิกัดหลุดออกไปข้างนอก */
     #noBtn {
       background-color: #ffffff;
       color: #ff4d6d;
       position: absolute;
-      top: 110px;  
-      left: 360px; 
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
       transition: all 0.15s ease-out; 
       z-index: 10;
-      padding: 12px 35px;
-      font-size: 20px;
+      padding: 10px 25px;
+      font-size: 16px;
       font-weight: 600;
       font-family: 'Kanit', sans-serif;
       border: none;
       border-radius: 50px;
       cursor: pointer;
       box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      white-space: nowrap;
     }
 
     /* Grid สำหรับการ์ดตัวเลือก */
     .option-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
+      gap: 12px;
       width: 100%;
-      margin-top: 10px;
-      margin-bottom: 20px;
+      margin-top: 5px;
+      margin-bottom: 15px;
     }
 
     .option-card {
       background: white;
       border: 3px solid transparent;
       border-radius: 20px;
-      padding: 15px 10px;
+      padding: 10px 5px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -157,12 +162,12 @@
     }
 
     .option-icon {
-      font-size: 42px;
-      margin-bottom: 5px;
+      font-size: 32px;
+      margin-bottom: 2px;
     }
 
     .option-name {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 600;
       color: #333;
     }
@@ -173,30 +178,30 @@
       flex-direction: column;
       align-items: center;
       width: 100%;
-      gap: 15px;
+      gap: 10px;
     }
 
     .input-group {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      width: 80%;
-      max-width: 300px;
+      gap: 5px;
+      width: 90%;
+      max-width: 280px;
       text-align: left;
     }
 
     .input-group label {
-      font-size: 16px;
+      font-size: 15px;
       color: #444;
       font-weight: 600;
     }
 
     .input-group input {
-      padding: 10px 15px;
-      border-radius: 15px;
+      padding: 8px 12px;
+      border-radius: 12px;
       border: 2px solid #ff9aa2;
       font-family: 'Kanit', sans-serif;
-      font-size: 16px;
+      font-size: 15px;
       outline: none;
       background: white;
     }
@@ -209,21 +214,25 @@
       animation: fadeIn 1s ease-out;
       z-index: 10;
       padding-bottom: 30px;
+      width: 90%;
+      max-width: 400px;
     }
 
     .photo-card {
       background: rgb(255, 255, 255);
-      padding: 15px;
+      padding: 12px;
       border-radius: 10px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       transform: rotate(-3deg);
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       position: relative;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     #successArea img {
-      max-width: 100%;
-      max-height: 38vh;
+      width: 100%;
+      max-height: 35vh;
       border-radius: 5px;
       object-fit: cover;
       display: block;
@@ -231,25 +240,25 @@
 
     .summary-box {
       background: rgba(255, 255, 255, 0.85);
-      padding: 15px 30px;
+      padding: 15px 20px;
       border-radius: 20px;
       text-align: left;
       box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      margin-top: 10px;
-      min-width: 260px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .summary-box h3 {
-      margin: 0 0 10px 0;
+      margin: 0 0 8px 0;
       color: #ff4d6d;
-      font-size: 22px;
+      font-size: 20px;
       text-align: center;
     }
 
     .summary-box p {
-      margin: 6px 0;
+      margin: 5px 0;
       color: #444;
-      font-size: 17px;
+      font-size: 16px;
     }
 
     @keyframes fadeIn {
@@ -274,21 +283,20 @@
 
   <h1 id="mainTitle"><span class="heart-icon">❤️</span> ดาด้าไปเที่ยวกันม่ะ? <span class="heart-icon">❤️</span></h1>
   
-  <!-- ✅ ข้อความเริ่มต้น -->
   <div id="pleaText">ไปป่าว 🥺</div>
 
   <!-- Container หลักสำหรับขั้นตอนที่ 1-4 -->
   <div class="container" id="playArea">
     
     <!-- Step 1: คำถามแรก (ปุ่มวิ่งหนี) -->
-    <div id="step1" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;">
-      <button id="yesBtn" class="btn-action" onclick="goToStep2()">ไปดิ! ❤️</button>
+    <div id="step1" style="display: flex; justify-content: space-around; align-items: center; width: 100%; height: 100%; position: relative;">
+      <button id="yesBtn" class="btn-action" style="position: absolute; left: 20px;" onclick="goToStep2()">ไปดิ! ❤️</button>
       <button id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">ไม่ไป! ❌</button>
     </div>
 
     <!-- Step 2: เลือกสถานที่เที่ยว -->
     <div id="placeStep" style="display: none; flex-direction: column; align-items: center; width: 100%;">
-      <h2 style="color: #333; margin-top: 0; margin-bottom: 5px;">อยากไปไหนดีน้า? 🤔</h2>
+      <h3 style="color: #333; margin: 0 0 5px 0;">อยากไปไหนดีน้า? 🤔</h3>
       <div class="option-grid">
         <div class="option-card" onclick="selectPlace(this, 'ไปดูหนัง 🍿')">
           <div class="option-icon">🍿</div>
@@ -304,7 +312,7 @@
 
     <!-- Step 3: เลือกอาหาร -->
     <div id="foodStep" style="display: none; flex-direction: column; align-items: center; width: 100%;">
-      <h2 style="color: #333; margin-top: 0; margin-bottom: 5px;">แล้วมื้อนี้กินไรดี? 😋</h2>
+      <h3 style="color: #333; margin: 0 0 5px 0;">แล้วมื้อนี้กินไรดี? 😋</h3>
       <div class="option-grid">
         <div class="option-card" onclick="selectFood(this, 'ส้มตำแซ่บๆ 🥗')">
           <div class="option-icon">🥗</div>
@@ -328,7 +336,7 @@
 
     <!-- Step 4: เลือกวันและเวลา -->
     <div id="dateStep">
-      <h2 style="color: #333; margin-top: 0;">นัดวันเวลาหน่อยสิ 🗓️</h2>
+      <h3 style="color: #333; margin: 0 0 5px 0;">นัดวันเวลาหน่อยสิ 🗓️</h3>
       <div class="input-group">
         <label for="travelDate">📅 ไปวันไหนดี:</label>
         <input type="date" id="travelDate">
@@ -337,7 +345,7 @@
         <label for="pickupTime">⏰ ให้ไปรับกี่โมง:</label>
         <input type="time" id="pickupTime">
       </div>
-      <button class="btn-action" style="margin-top: 15px;" onclick="showSummary()">ตกลงตามนี้! ❤️</button>
+      <button class="btn-action" style="margin-top: 5px;" onclick="showSummary()">ตกลงตามนี้! ❤️</button>
     </div>
 
   </div>
@@ -347,7 +355,7 @@
     <div class="photo-card">
       <img src="testpics.jpg" alt="เย้!">
     </div>
-    <h2 style="margin: 5px 0 15px 0;">เย้! ดีลเรียบร้อย ❤️</h2>
+    <h2 style="margin: 0 0 10px 0; font-size: 24px;">เย้! ดีลเรียบร้อย ❤️</h2>
     <div class="summary-box">
       <h3>สรุปแพลนเดท ✨</h3>
       <p id="summaryPlace">📍 สถานที่: -</p>
@@ -358,7 +366,6 @@
   </div>
 
   <script>
-    // รายการข้อความที่จะเปลี่ยนวนไปเรื่อยๆ เมื่อปุ่มหนี
     const pleaMessages = [
       'ไปป่าว 🥺',
       'ขอร้องง 🥺',
@@ -370,10 +377,9 @@
     let selectedPlaceText = "";
     let selectedFoodText = "";
 
-    // หัวใจลอย Background
     function createFloatingHearts() {
       const container = document.body;
-      const heartCount = 15;
+      const heartCount = 12;
 
       for (let i = 0; i < heartCount; i++) {
         createHeart(container);
@@ -385,7 +391,7 @@
       heart.innerHTML = '❤️';
       heart.classList.add('floating-heart');
       
-      const size = Math.random() * 20 + 10;
+      const size = Math.random() * 18 + 10;
       const left = Math.random() * 100;
       const duration = Math.random() * 5 + 5;
       const delay = Math.random() * 5;
@@ -412,65 +418,38 @@
       document.getElementById('pickupTime').value = "17:00";
     });
 
-    // ฟังก์ชันปุ่ม "ไม่ไป" หลบเมาส์ + สลับข้อความ
+    // ✅ ปรับแก้ระบบคำนวณตำแหน่งปุ่มวิ่งหนีให้อยู่ภายใน Container เสมอ
     function moveButton() {
       const btn = document.getElementById('noBtn');
       const yesBtn = document.getElementById('yesBtn');
       const area = document.getElementById('playArea');
       const pleaText = document.getElementById('pleaText');
       
-      // ✅ เปลี่ยนข้อความวนลูป
       pleaIndex = (pleaIndex + 1) % pleaMessages.length;
       pleaText.innerText = pleaMessages[pleaIndex];
 
       pleaText.classList.add('pop-effect');
       setTimeout(() => pleaText.classList.remove('pop-effect'), 150);
 
-      const areaWidth = area.offsetWidth;
-      const areaHeight = area.offsetHeight;
+      const areaWidth = area.clientWidth;
+      const areaHeight = area.clientHeight;
       const btnWidth = btn.offsetWidth;
       const btnHeight = btn.offsetHeight;
 
-      const yesLeft = yesBtn.offsetLeft;
-      const yesTop = yesBtn.offsetTop;
-      const yesRight = yesLeft + yesBtn.offsetWidth;
-      const yesBottom = yesTop + yesBtn.offsetHeight;
+      const margin = 15;
+      const maxLeft = areaWidth - btnWidth - margin;
+      const maxTop = areaHeight - btnHeight - margin;
 
-      const padding = 20;
-      let newX, newY;
-      let isOverlapping = true;
-      let attempts = 0;
-      const margin = 10;
+      let newX = Math.random() * (maxLeft - margin) + margin;
+      let newY = Math.random() * (maxTop - margin) + margin;
 
-      while (isOverlapping && attempts < 100) {
-        newX = Math.random() * (areaWidth - btnWidth - margin * 2) + margin;
-        newY = Math.random() * (areaHeight - btnHeight - margin * 2) + margin;
-
-        const noRight = newX + btnWidth;
-        const noBottom = newY + btnHeight;
-
-        if (
-          newX < yesRight + padding &&
-          noRight > yesLeft - padding &&
-          newY < yesBottom + padding &&
-          noBottom > yesTop - padding
-        ) {
-          isOverlapping = true; 
-        } else {
-          const currentX = btn.offsetLeft;
-          const currentY = btn.offsetTop;
-          const distance = Math.sqrt(Math.pow(newX - currentX, 2) + Math.pow(newY - currentY, 2));
-          if(distance < 50) {
-             isOverlapping = true;
-          } else {
-             isOverlapping = false; 
-          }
-        }
-        attempts++;
-      }
+      // ล็อคตำแหน่งปุ่ม ไม่ให้หลุดพิกัดขอบกล่อง
+      newX = Math.max(margin, Math.min(newX, maxLeft));
+      newY = Math.max(margin, Math.min(newY, maxTop));
       
       btn.style.left = `${newX}px`;
       btn.style.top = `${newY}px`;
+      btn.style.transform = 'none'; // ยกเลิก translateY
     }
 
     function goToStep2() {
