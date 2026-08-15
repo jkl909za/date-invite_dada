@@ -54,6 +54,7 @@
       font-size: 22px;
     }
 
+    /* ✅ เพิ่มความสมูทเวลาข้อความอ้อนเปลี่ยนและเด้ง */
     #pleaText {
       font-size: 20px;
       font-weight: 600;
@@ -62,13 +63,13 @@
       height: 30px;
       text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.9);
       z-index: 10;
-      transition: transform 0.15s ease-out;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease;
       user-select: none;
       text-align: center;
     }
 
     .pop-effect {
-      transform: scale(1.3) rotate(-3deg);
+      transform: scale(1.25) rotate(-3deg);
     }
 
     /* Container การ์ดส่วนกลาง */
@@ -92,7 +93,7 @@
       box-shadow: 0 8px 30px rgba(0,0,0,0.05);
     }
 
-    /* Step 1 ล็อคความสูงเฉพาะปุ่มวิ่งหนี */
+    /* Step 1 ล็อคพื้นที่สำหรับปุ่มวิ่งหนี */
     #step1 {
       position: relative;
       width: 100%;
@@ -124,7 +125,7 @@
       transform: scale(1.05);
     }
 
-    /* ปุ่มไม่ไป */
+    /* ✅ ใส่ transition ให้ปุ่มหนีเคลื่อนที่อย่างนุ่มนวล */
     #noBtn {
       padding: 10px 24px;
       font-size: 18px;
@@ -138,6 +139,13 @@
       color: #ff4d6d;
       white-space: nowrap;
       z-index: 20;
+      transition: left 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                  top 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                  transform 0.2s ease;
+    }
+
+    #noBtn:active {
+      transform: scale(0.95);
     }
 
     /* Grid สำหรับการ์ดตัวเลือก */
@@ -226,7 +234,6 @@
       max-width: 380px;
     }
 
-    /* ✅ ปรับความกว้างกรอบรูปให้สมดุลตามสัดส่วนจริง */
     .photo-card {
       background: white;
       padding: 10px;
@@ -238,7 +245,6 @@
       display: inline-block;
     }
 
-    /* ✅ แสดงรูปภาพตามสัดส่วนดั้งเดิม ไม่โดนครอบตัด */
     #successArea img {
       width: 100%;
       max-width: 340px;
@@ -427,10 +433,15 @@
       const pleaText = document.getElementById('pleaText');
       
       pleaIndex = (pleaIndex + 1) % pleaMessages.length;
-      pleaText.innerText = pleaMessages[pleaIndex];
-
-      pleaText.classList.add('pop-effect');
-      setTimeout(() => pleaText.classList.remove('pop-effect'), 150);
+      
+      // ✅ เพิ่มอนิเมชันเปลี่ยนข้อความอ้อนให้นุ่มนวล
+      pleaText.style.opacity = '0.3';
+      setTimeout(() => {
+        pleaText.innerText = pleaMessages[pleaIndex];
+        pleaText.style.opacity = '1';
+        pleaText.classList.add('pop-effect');
+        setTimeout(() => pleaText.classList.remove('pop-effect'), 200);
+      }, 100);
 
       btn.style.position = 'absolute';
 
